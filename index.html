@@ -1,1 +1,315 @@
-<h1>Github pages lsm</h1>
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traductor de Señas LMS - Prototipo</title>
+    <style>
+        /* --- ESTILOS ANTERIORES (Mantenidos) --- */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --text: #334155;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        nav {
+            background-color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section (CON IMAGEN DE FONDO OPCIONAL) */
+        header {
+            /* He añadido un degradado sobre una posible imagen de fondo */
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 122, 0.8) 100%), 
+                        url('heroe-senas.jpg') no-repeat center center/cover; /* <--- TU IMAGEN AQUÍ */
+            color: white;
+            padding: 8rem 2rem; /* Aumentado el padding para dar espacio */
+            text-align: center;
+        }
+
+        header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Mejora legibilidad */
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            color: #cbd5e1;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* --- NUEVOS ESTILOS PARA IMÁGENES --- */
+        
+        /* Estilo general para imágenes dentro del contenido */
+        .img-fluid {
+            max-width: 100%; /* No se sale de su contenedor */
+            height: auto;    /* Mantiene la proporción */
+            border-radius: 8px; /* Bordes suaves */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilo específico para secciones con texto e imagen lado a lado */
+        .section-content-with-img {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .section-text {
+            flex: 1;
+        }
+
+        .section-img-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Tarjetas de Funcionamiento */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-num {
+            background-color: #dbeafe;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Estado del Prototipo */
+        .status-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            header h2 {
+                font-size: 2rem;
+            }
+            .section-content-with-img {
+                flex-direction: column; /* Texto e imagen uno abajo del otro en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de Navegación -->
+    <nav>
+        <h1>Traductor LMS</h1>
+        <ul>
+            <li><a href="#proyecto">El Proyecto</a></li>
+            <li><a href="#funcionamiento">¿Cómo funciona?</a></li>
+            <li><a href="#objetivo">Objetivo</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Hero (Presentación principal con imagen de fondo en CSS) -->
+    <header>
+        <span class="badge">PROTOTIPO V1.0</span>
+        <h2>Traductor de Lengua de Señas Mexicana</h2>
+        <p>Una herramienta tecnológica diseñada para cerrar la brecha de comunicación mediante el dactileo y deletreo automatizado de señas.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Sobre el Proyecto (Texto + Imagen) -->
+        <section id="proyecto">
+            <h3>Sobre el Proyecto</h3>
+            <div class="section-content-with-img">
+                <div class="section-text">
+                    <p>Este proyecto es un **prototipo de sistema inteligente** enfocado en la traducción de la Lengua de Señas Mexicana (LMS). Su función principal actualmente es el **deletreo de palabras letra por letra (dactilología)** a través del reconocimiento y procesamiento visual de las señas de las manos.</p>
+                    
+                    <div class="status-box">
+                        <strong>Estado actual:</strong> El sistema se encuentra en fase de desarrollo temprano. Reconoce el alfabeto básico (A-Z) de forma estática para construir palabras de manera progresiva.
+                    </div>
+                </div>
+                <div class="section-img-container">
+                    <!-- AGREGAR IMAGEN DEL PROTOTIPO AQUÍ -->
+                    <img src="funcionamiento-senas.jpg" alt="Captura de pantalla del prototipo reconociendo una seña" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Cómo Funciona (Mantenemos las tarjetas, sin cambios necesarios) -->
+        <section id="funcionamiento">
+            <h3>¿Cómo funciona el sistema?</h3>
+            <p>El prototipo utiliza procesamiento de imágenes y modelos de aprendizaje para realizar la traducción en tres pasos clave:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-num">1</div>
+                    <h4>Captura de Video</h4>
+                    <p>El usuario realiza la seña de la letra frente a una cámara web o sensor en tiempo real.</p>
+                </div>
+                <div class="card">
+                    <div class="card-num">2</div>
+                    <h4>Procesamiento</h4>
+                    <p>El algoritmo analiza los puntos clave de la mano para identificar la letra correspondiente.</p>
+                </div>
+                <div class="card">
+                    <div class="card-num">3</div>
+                    <h4>Texto en Pantalla</h4>
+                    <p>La letra identificada se traduce a texto y se suma para formar palabras completas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objetivo e Impacto (Imagen + Texto inverso) -->
+        <section id="objetivo">
+            <h3>Objetivo e Impacto Social</h3>
+            <div class="section-content-with-img">
+                <div class="section-img-container">
+                    <!-- AGREGAR IMAGEN DE IMPACTO SOCIAL AQUÍ -->
+                    <img src="impacto-social.jpg" alt="Personas comunicándose inclusivamente" class="img-fluid">
+                </div>
+                <div class="section-text">
+                    <p>La falta de conocimiento de la LMS por parte de la población oyente crea barreras diarias para la comunidad sorda. El objetivo de este traductor es servir como una herramienta de apoyo didáctico e inclusión social, permitiendo una comunicación básica, fluida y accesible para cualquier persona sin importar si conoce o no la lengua de señas.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 Proyecto Traductor de Señas LMS. Diseñado como prototipo de inclusión tecnológica.</p>
+    </footer>
+
+</body>
+</html>
